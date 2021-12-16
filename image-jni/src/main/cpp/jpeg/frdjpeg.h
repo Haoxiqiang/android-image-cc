@@ -15,6 +15,7 @@
 
 #define FILE_OPEN_FAILED -1
 #define LIBJPEG_SIGNAL_ERROR -2
+#define LIBJPEG_TOO_BIG -3
 
 #ifndef min
 #define min(a, b)  ((a) < (b) ? (a) : (b))

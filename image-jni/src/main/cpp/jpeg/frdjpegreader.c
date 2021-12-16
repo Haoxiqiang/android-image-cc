@@ -74,12 +74,18 @@ int read_JPEG_file(struct FRD_IMAGE *frd_image) {
     frd_image->components = jpeg_dc_info.output_components;
     frd_image->color_space = jpeg_dc_info.out_color_space;
 
-    frd_image->pixels = malloc(
-            sizeof(unsigned char) * jpeg_dc_info.output_width * jpeg_dc_info.output_height *
-            jpeg_dc_info.output_components);
     long counter = 0;
-
-    size_t row_stride = jpeg_dc_info.output_width * jpeg_dc_info.output_components;
+    long may_stride = (long) (jpeg_dc_info.output_width * jpeg_dc_info.output_components);
+    if (may_stride > INT32_MAX || may_stride < 0) {
+        LOGE("stride is too big. output_width:%d output_components:$d", jpeg_dc_info.output_width,
+             jpeg_dc_info.output_components);
+        jpeg_destroy_decompress(&jpeg_dc_info);
+        fclose(infile);
+        return LIBJPEG_TOO_BIG;
+    }
+    size_t row_stride = (size_t) may_stride;
+    frd_image->pixels = malloc(
+            sizeof(unsigned char) * may_stride * jpeg_dc_info.output_height);
 
     JDIMENSION buffer_height = 1;
     JSAMPARRAY buffer = (JSAMPARRAY) malloc(sizeof(JSAMPROW) * buffer_height);
