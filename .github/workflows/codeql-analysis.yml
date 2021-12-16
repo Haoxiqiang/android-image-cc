@@ -38,8 +38,9 @@ jobs:
           echo "Downloading submodules"
           git submodule update --init --force --recursive
 
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v1
+      - run: |
+          echo "Build Project"
+          ./gradlew assemble
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
