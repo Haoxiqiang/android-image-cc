@@ -15,7 +15,7 @@ A library built with the CMake is used for jpeg file decompress/compress on the 
 ## Building
 ### Requirements
 - Android NDK r22
-- Android SDK 
+- Android SDK
 - Android SDK Build tools 31.x
 - CMake 3.10.2
 

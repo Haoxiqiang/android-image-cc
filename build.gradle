@@ -15,17 +15,18 @@ plugins {
 }
 
 subprojects {
+
+    if ("app".equalsIgnoreCase(project.name)) {
+        apply plugin: 'com.android.application'
+    } else {
+        apply plugin: 'com.android.library'
+    }
+
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
         kotlinOptions {
             // Treat all Kotlin warnings as errors
             allWarningsAsErrors = false
-
-            // Enable experimental coroutines APIs, including Flow
-            freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
-            freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.FlowPreview"
-            freeCompilerArgs += "-Xopt-in=kotlin.Experimental"
-
-            // Set JVM target to 11
+            // Set JVM target to 8-11
             jvmTarget = JavaVersion.VERSION_1_8
         }
     }

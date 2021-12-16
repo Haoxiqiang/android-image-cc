@@ -1,4 +1,4 @@
-package com.thefrodo.image.jpeg
+package com.thefrodo.image.samples
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
