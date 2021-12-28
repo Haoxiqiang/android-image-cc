@@ -1,9 +1,11 @@
-# AndroidLibJpeg
-A library built with the CMake is used for jpeg file decompress/compress on the Android platform.
+# Android Image Decompress/Compress And Convert/Transform
+
+A library built with the CMake is used for image file decompress/compress on the Android platform.
 
 ## WHY
 
-* fix Bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream); [Use libjpeg-turbo for YUV->RGB conversion in jpeg encoder](https://github.com/google/skia/commit/c7d01d3e1d3621907c27b283fb7f8b6e177c629d)
+* fix Bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream)
+  ; [Use libjpeg-turbo for YUV->RGB conversion in jpeg encoder](https://github.com/google/skia/commit/c7d01d3e1d3621907c27b283fb7f8b6e177c629d)
 * easy customization
 * I want to get to know the diff. image's library.
 
@@ -13,7 +15,9 @@ A library built with the CMake is used for jpeg file decompress/compress on the 
 * support jpeg compress.
 
 ## Building
+
 ### Requirements
+
 - Android NDK r22
 - Android SDK
 - Android SDK Build tools 31.x
@@ -23,7 +27,8 @@ you can change the ndk version by build.gradle#ndkVersion
 
 ## Build Problems
 
-* "libclang_rt.asan-arm-android.so" not found.  CauseBy: -fsanitize=address, if midSdk < 21, remove the cflags or upgrade minSdk at least 21.
+* "libclang_rt.asan-arm-android.so" not found. CauseBy: -fsanitize=address, if midSdk < 21, remove
+  the cflags or upgrade minSdk at least 21.
 
 ## Roadmap
 
