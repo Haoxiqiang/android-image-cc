@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.10.2)
-project(image-jni)
+
+project(libwebp)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -18,5 +19,16 @@ else ()
     message(FATAL_ERROR "Invalid Android ABI: ${ANDROID_ABI}.")
 endif ()
 
-add_subdirectory("jpeg" libjpeg-turbo)
-add_subdirectory("webp" libwebp)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -fstrict-aliasing")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -O3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexceptions -frtti -flto -ffunction-sections -fdata-sections -fstrict-aliasing ")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__STDC_FORMAT_MACROS")
+
+set(SOURCE_PATH ../../../../../external/libwebp)
+message(STATUS "SOURCE_PATH libwebp:${SOURCE_PATH}")
+
+add_subdirectory("${SOURCE_PATH}" libwebp)
+
+
+

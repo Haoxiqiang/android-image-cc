@@ -11,8 +11,11 @@ A library built with the CMake is used for image file decompress/compress on the
 
 ## Feature
 
+* libjpeg-turbo v2.1.2
+* libwebp v1.2.2
 * support libjpeg-turbo built by cmake on Android platform.
 * support jpeg compress.
+* support webp compress.
 
 ## Building
 
@@ -34,3 +37,4 @@ you can change the ndk version by build.gradle#ndkVersion
 
 - [x] add libjpeg built
 - [ ] add libwebp built
+- [ ] add heif built

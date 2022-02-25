@@ -3,7 +3,7 @@ buildscript {
     apply from: rootProject.file('./scripts/spotless.gradle')
 
     dependencies {
-        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.0.0"
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.1.0"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:1.6.0"
     }
 }
