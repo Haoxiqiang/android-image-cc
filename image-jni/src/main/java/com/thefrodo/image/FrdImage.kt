@@ -3,24 +3,24 @@ package com.thefrodo.image
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import java.io.File
-import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicBoolean
 
 object FrdImage {
 
     const val TAG_LibJpeg = "jpeg-turbo"
     const val TAG_LibPNG = "frdpng"
 
-    private val concurrentHashMap = ConcurrentHashMap<String, Boolean>()
+    private val nativeLoaded = AtomicBoolean(false)
     var nativeLoader: ((lib: String) -> Boolean)? = null
 
-    fun nativeLoad(libName: String) {
-        if (concurrentHashMap[libName] != true) {
+    fun nativeLoad() {
+        if (nativeLoaded.get().not()) {
             if (nativeLoader == null) {
-                System.loadLibrary(libName)
-                concurrentHashMap[libName] = true
+                System.loadLibrary("frdimage")
+                nativeLoaded.set(true)
             } else {
-                if (nativeLoader!!.invoke(libName)) {
-                    concurrentHashMap[libName] = true
+                if (nativeLoader!!.invoke("frdimage")) {
+                    nativeLoaded.set(true)
                 }
             }
         }

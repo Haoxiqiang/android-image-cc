@@ -35,8 +35,7 @@ set(PNGLIB_VERSION ${PNGLIB_MAJOR}.${PNGLIB_MINOR}.${PNGLIB_RELEASE})
 # COMMAND LINE OPTIONS
 option(PNG_HARDWARE_OPTIMIZATIONS "Enable hardware optimizations" ON)
 
-# No awk available to generate sources; use pre-built pnglibconf.h
-configure_file(${SOURCE_PATH}/scripts/pnglibconf.h.prebuilt ${CMAKE_CURRENT_BINARY_DIR}/include/pnglibconf.h @ONLY)
+configure_file(${SOURCE_PATH}/scripts/pnglibconf.h.prebuilt ${CMAKE_CURRENT_BINARY_DIR}/include/pnglibconf.h COPYONLY)
 
 # set definitions and sources for arm
 if (CMAKE_SYSTEM_PROCESSOR MATCHES "^arm" OR
@@ -103,25 +102,6 @@ add_library(png STATIC ${libpng_sources})
 target_link_libraries(png zlib log cpufeatures)
 
 target_include_directories(png PUBLIC
+        ${SOURCE_PATH}
+        ${CMAKE_CURRENT_BINARY_DIR}/include
         ${ANDROID_NDK}/sources/android/cpufeatures)
-
-# start build shared tools.
-add_library(frdpng
-        SHARED
-        libpng.c
-        )
-
-find_library(
-        log-lib
-        log
-)
-
-target_link_libraries(frdpng
-        png
-        jnigraphics
-        ${log-lib})
-
-set_target_properties(frdpng PROPERTIES
-        PREFIX "lib"
-        SUFFIX ".so")
-

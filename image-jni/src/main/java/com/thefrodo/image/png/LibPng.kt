@@ -7,12 +7,12 @@ import com.thefrodo.image.FrdImage
 class LibPng {
 
     fun isPng(path: String): Boolean {
-        FrdImage.nativeLoad(FrdImage.TAG_LibPNG)
+        FrdImage.nativeLoad()
         return isPNGImage(path)
     }
 
     fun printPNgInfo(path: String) {
-        FrdImage.nativeLoad(FrdImage.TAG_LibPNG)
+        FrdImage.nativeLoad()
         return pngInfo(path)
     }
 

@@ -47,7 +47,7 @@ class LibJpeg {
             return false
         }
 
-        FrdImage.nativeLoad(FrdImage.TAG_LibJpeg)
+        FrdImage.nativeLoad()
 
         val isJpegFormat = try {
             val inputStream = src.inputStream()
