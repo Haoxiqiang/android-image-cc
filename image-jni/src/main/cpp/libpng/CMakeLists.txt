@@ -35,8 +35,11 @@ set(PNGLIB_VERSION ${PNGLIB_MAJOR}.${PNGLIB_MINOR}.${PNGLIB_RELEASE})
 # COMMAND LINE OPTIONS
 option(PNG_HARDWARE_OPTIMIZATIONS "Enable hardware optimizations" ON)
 
-configure_file(${SOURCE_PATH}/scripts/pnglibconf.h.prebuilt ${CMAKE_CURRENT_BINARY_DIR}/include/pnglibconf.h COPYONLY)
+message(WARNING "SOURCE_PATH: ${SOURCE_PATH}.")
+message(WARNING "CMAKE_CURRENT_BINARY_DIR: ${CMAKE_CURRENT_BINARY_DIR}.")
 
+configure_file(${SOURCE_PATH}/scripts/pnglibconf.h.prebuilt ${CMAKE_CURRENT_BINARY_DIR}/include/pnglibconf.h COPYONLY)
+set(PNG_CONFIG_HEADER ${CMAKE_CURRENT_BINARY_DIR}/include)
 # set definitions and sources for arm
 if (CMAKE_SYSTEM_PROCESSOR MATCHES "^arm" OR
         CMAKE_SYSTEM_PROCESSOR MATCHES "^aarch64")
@@ -52,14 +55,16 @@ endif ()
 set_property(SOURCE ${libpng_arm_sources}
         APPEND_STRING PROPERTY COMPILE_FLAGS " -mfpu=neon")
 
-include_directories(${SOURCE_PATH})
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/include/)
+include_directories(
+        ${SOURCE_PATH}
+        ${PNG_CONFIG_HEADER}
+)
 
 # OUR SOURCES
 set(libpng_public_hdrs
+        ${PNG_CONFIG_HEADER}/pnglibconf.h
         ${SOURCE_PATH}/png.h
         ${SOURCE_PATH}/pngconf.h
-        "${SOURCE_PATH}/pnglibconf.h"
         )
 set(libpng_private_hdrs
         ${SOURCE_PATH}/pngpriv.h
@@ -103,5 +108,5 @@ target_link_libraries(png zlib log cpufeatures)
 
 target_include_directories(png PUBLIC
         ${SOURCE_PATH}
-        ${CMAKE_CURRENT_BINARY_DIR}/include
+        ${PNG_CONFIG_HEADER}
         ${ANDROID_NDK}/sources/android/cpufeatures)
