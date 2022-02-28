@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.test.filters.SmallTest
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.runner.AndroidJUnit4
+import com.thefrodo.image.FrdImage
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -25,7 +26,7 @@ class LibJpegTest {
         val context = getInstrumentation().context
         cacheDir = context.externalCacheDir!!
         cacheDir.mkdirs()
-        originFile = File(context.cacheDir, "test4k.jpeg")
+        originFile = File(context.cacheDir, "images/assets/test4k.jpeg")
     }
 
     @Before
@@ -70,7 +71,7 @@ class LibJpegTest {
             )
         )
         val end = SystemClock.elapsedRealtime()
-        Log.d(LibJpeg.TAG, "LibJpeg#compressBySystem cost=${end - start}ms")
+        Log.d(FrdImage.TAG_LibJpeg, "LibJpeg#compressBySystem cost=${end - start}ms")
     }
 
     @Test
@@ -88,7 +89,7 @@ class LibJpegTest {
             )
         )
         val end = SystemClock.elapsedRealtime()
-        Log.d(LibJpeg.TAG, "LibJpeg#compressLibJpeg cost=${end - start}ms")
+        Log.d(FrdImage.TAG_LibJpeg, "LibJpeg#compressLibJpeg cost=${end - start}ms")
     }
 
     @Test
@@ -107,7 +108,7 @@ class LibJpegTest {
             )
         )
         val end = SystemClock.elapsedRealtime()
-        Log.d(LibJpeg.TAG, "LibJpeg#compressWithAlpha cost=${end - start}ms")
+        Log.d(FrdImage.TAG_LibJpeg, "LibJpeg#compressWithAlpha cost=${end - start}ms")
     }
 
     @Test
@@ -126,7 +127,7 @@ class LibJpegTest {
             )
         )
         val end = SystemClock.elapsedRealtime()
-        Log.d(LibJpeg.TAG, "LibJpeg#compressBitmap cost=${end - start}ms")
+        Log.d(FrdImage.TAG_LibJpeg, "LibJpeg#compressBitmap cost=${end - start}ms")
     }
 
     @Test
@@ -149,7 +150,7 @@ class LibJpegTest {
             cost += end - start
             dstSys100File.copyTo(src, true)
         }
-        Log.d(LibJpeg.TAG, "LibJpeg#compressSys100 cost=${cost}ms avg:${cost.toFloat() / 100}")
+        Log.d(FrdImage.TAG_LibJpeg, "LibJpeg#compressSys100 cost=${cost}ms avg:${cost.toFloat() / 100}")
     }
 
     //
@@ -175,6 +176,6 @@ class LibJpegTest {
             dst100File.copyTo(src, true)
         }
 
-        Log.d(LibJpeg.TAG, "LibJpeg#compress100 cost=${cost}ms avg:${cost.toFloat() / 100}")
+        Log.d(FrdImage.TAG_LibJpeg, "LibJpeg#compress100 cost=${cost}ms avg:${cost.toFloat() / 100}")
     }
 }

@@ -9,9 +9,9 @@
 #include <math.h>
 
 #define LOG_TAG "LibJpeg"
-#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO, LOG_TAG,__VA_ARGS__)
-#define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
-#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO, LOG_TAG,__VA_ARGS__)
+#define LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
+#define LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 #define FILE_OPEN_FAILED -1
 #define LIBJPEG_SIGNAL_ERROR -2
@@ -58,7 +58,8 @@ int read_JPEG_file(struct FRD_IMAGE *frd_image);
 
 int write_JPEG_file(struct FRD_IMAGE *frd_image, int quality);
 
-int jpeg_compress_file(JNIEnv *env, jstring src, jstring dst, jint quality, jboolean fancy_upsampling);
+int
+jpeg_compress_file(JNIEnv *env, jstring src, jstring dst, jint quality, jboolean fancy_upsampling);
 
 int jpeg_compress_bitmap(JNIEnv *env, jobject bitmap, jstring dst, jint quality);
 

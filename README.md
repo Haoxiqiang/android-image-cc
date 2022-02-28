@@ -11,13 +11,18 @@ A library built with the CMake is used for image file decompress/compress on the
 
 ## Feature
 
+* zlib v1.2.11
 * libjpeg-turbo v2.1.2
+* libpng v1.6.37
 * libwebp v1.2.2
 * support libjpeg-turbo built by cmake on Android platform.
 * support jpeg compress.
 * support webp compress.
 
 ## Building
+
+* build zlib v1.2.11, all ndk versions contains zlib that v1.2.3, it will cause many image libs
+  which use zlib failed.
 
 ### Requirements
 
@@ -33,8 +38,19 @@ you can change the ndk version by build.gradle#ndkVersion
 * "libclang_rt.asan-arm-android.so" not found. CauseBy: -fsanitize=address, if midSdk < 21, remove
   the cflags or upgrade minSdk at least 21.
 
+* libpng with zlib build failed.
+
+```c
+#if PNG_ZLIB_VERNUM != 0 && PNG_ZLIB_VERNUM != ZLIB_VERNUM
+#  error ZLIB_VERNUM != PNG_ZLIB_VERNUM \
+      "-I (include path) error: see the notes in pngpriv.h"
+```
+
+check `zlib.h` and `pngpriv.h` ZLIB_VERNUM == PNG_ZLIB_VERNUM
+
 ## Roadmap
 
 - [x] add libjpeg built
+- [x] add libpng built
 - [ ] add libwebp built
 - [ ] add heif built

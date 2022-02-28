@@ -18,5 +18,16 @@ else ()
     message(FATAL_ERROR "Invalid Android ABI: ${ANDROID_ABI}.")
 endif ()
 
-add_subdirectory("jpeg" libjpeg-turbo)
-add_subdirectory("webp" libwebp)
+message(WARNING "ANDROID_NDK :${ANDROID_NDK}")
+
+# cpufeatures
+include_directories(${ANDROID_NDK}/sources/android/cpufeatures)
+add_library(cpufeatures STATIC
+        ${ANDROID_NDK}/sources/android/cpufeatures/cpu-features.c)
+
+# zlib
+add_subdirectory("zlib" zlib)
+
+add_subdirectory("libjpeg" libjpeg-turbo)
+#add_subdirectory("libwebp" webp)
+add_subdirectory("libpng" libpng)

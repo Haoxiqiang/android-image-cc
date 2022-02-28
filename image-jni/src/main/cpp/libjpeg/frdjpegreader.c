@@ -3,13 +3,16 @@
 #include "frdjpeg.h"
 
 METHODDEF(void)
-frd_jpeg_dc_error_exit(j_common_ptr jpeg_dc_info) {
-    // jpeg_dc_info->err really points to a frd_jpeg_error_mgr struct, so coerce pointer
-    frd_jpeg_error_ptr fj_err = (frd_jpeg_error_ptr) jpeg_dc_info->err;
-    //  We could postpone this until after returning, if we chose.
-    (*jpeg_dc_info->err->output_message)(jpeg_dc_info);
-    // Return control to the setjmp point
-    longjmp(fj_err->set_jmp_buffer, 1);
+
+frd_jpeg_dc_error_exit(j_common_ptr
+jpeg_dc_info) {
+// jpeg_dc_info->err really points to a frd_jpeg_error_mgr struct, so coerce pointer
+frd_jpeg_error_ptr fj_err = (frd_jpeg_error_ptr) jpeg_dc_info->err;
+//  We could postpone this until after returning, if we chose.
+(*jpeg_dc_info->err->output_message)(jpeg_dc_info);
+// Return control to the setjmp point
+longjmp(fj_err
+->set_jmp_buffer, 1);
 }
 
 int read_JPEG_file(struct FRD_IMAGE *frd_image) {
@@ -77,7 +80,7 @@ int read_JPEG_file(struct FRD_IMAGE *frd_image) {
     long counter = 0;
     long may_stride = (long) (jpeg_dc_info.output_width * jpeg_dc_info.output_components);
     if (may_stride > INT32_MAX || may_stride < 0) {
-        LOGE("stride is too big. output_width:%d output_components:$d", jpeg_dc_info.output_width,
+        LOGE("stride is too big. output_width:%d output_components:%d", jpeg_dc_info.output_width,
              jpeg_dc_info.output_components);
         jpeg_destroy_decompress(&jpeg_dc_info);
         fclose(infile);

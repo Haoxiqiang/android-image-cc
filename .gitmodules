@@ -4,3 +4,9 @@
 [submodule "external/libwebp"]
 	path = external/libwebp
 	url = https://github.com/webmproject/libwebp/
+[submodule "external/libpng"]
+	path = external/libpng
+	url = https://git.code.sf.net/p/libpng/code
+[submodule "external/zlib"]
+	path = external/zlib
+	url = https://github.com/madler/zlib

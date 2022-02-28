@@ -36,6 +36,9 @@ android {
 
     sourceSets {
         androidTest.setRoot("src/androidTest")
+        main {
+            assets.srcDirs = [rootProject.file("images/assets")]
+        }
     }
 
     compileOptions {

@@ -8,18 +8,16 @@ import android.util.Log
 import androidx.annotation.IntRange
 import androidx.annotation.Keep
 import androidx.exifinterface.media.ExifInterface
+import com.thefrodo.image.FrdImage
 import java.io.BufferedInputStream
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.util.concurrent.atomic.AtomicBoolean
 
 @Keep
 class LibJpeg {
 
     companion object {
-        const val TAG = "LibJpeg"
         private const val quality = 80
-        private val nativeLoaded = AtomicBoolean(false)
     }
 
     enum class CompressMode {
@@ -36,7 +34,6 @@ class LibJpeg {
         dst: File,
         overwrite: Boolean = false,
         keepAlpha: Boolean = false,
-        nativeLoader: ((lib: String) -> Boolean)? = null
     ): Boolean {
 
         if (overwrite) {
@@ -46,20 +43,11 @@ class LibJpeg {
         }
 
         if (dst.exists()) {
-            Log.e(TAG, "dst file exists.")
+            Log.e(FrdImage.TAG_LibJpeg, "dst file exists.")
             return false
         }
 
-        if (nativeLoaded.get().not()) {
-            if (nativeLoader == null) {
-                System.loadLibrary("jpeg-turbo")
-                nativeLoaded.set(true)
-            } else {
-                if (nativeLoader.invoke("jpeg-turbo")) {
-                    nativeLoaded.set(true)
-                }
-            }
-        }
+        FrdImage.nativeLoad(FrdImage.TAG_LibJpeg)
 
         val isJpegFormat = try {
             val inputStream = src.inputStream()
@@ -78,7 +66,7 @@ class LibJpeg {
         if (isJpegFormat && mode == CompressMode.ForceLibJpegBitmap) {
             val outBitmap = loadBitmapFromFile(src)
             if (outBitmap == null) {
-                Log.e(TAG, "decode bitmap from source file failed.")
+                Log.e(FrdImage.TAG_LibJpeg, "decode bitmap from source file failed.")
                 return false
             }
             return nativeCompressBitmap(outBitmap, dst.absolutePath, quality)
@@ -88,7 +76,7 @@ class LibJpeg {
             val outBitmap = loadBitmapFromFile(src)
 
             if (outBitmap == null) {
-                Log.e(TAG, "decode bitmap from source file failed.")
+                Log.e(FrdImage.TAG_LibJpeg, "decode bitmap from source file failed.")
                 return false
             }
 
@@ -103,7 +91,7 @@ class LibJpeg {
                     bos.close()
                     stream.close()
                     outBitmap.recycle()
-                    Log.e(TAG, "bitmap compress failed.")
+                    Log.e(FrdImage.TAG_LibJpeg, "bitmap compress failed.")
                     return false
                 }
                 stream.write(bos.toByteArray())
