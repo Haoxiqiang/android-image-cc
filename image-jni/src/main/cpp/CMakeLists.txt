@@ -32,7 +32,6 @@ add_subdirectory("libjpeg" libjpeg)
 
 #add_subdirectory("libwebp" webp)
 
-
 add_library(frdimage
         SHARED
         libjpeg/libjpeg-jni.c

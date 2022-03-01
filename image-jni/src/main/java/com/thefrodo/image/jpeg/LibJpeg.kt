@@ -138,6 +138,19 @@ class LibJpeg {
         return Bitmap.createBitmap(bitmap!!, 0, 0, bitmap.width, bitmap.height, matrix, true)
     }
 
+    fun isJpeg(path: String): Boolean {
+        FrdImage.nativeLoad()
+        return isJpegImage(path)
+    }
+
+    fun printJpegInfo(path: String) {
+        FrdImage.nativeLoad()
+        return jpegInfo(path)
+    }
+
+    private external fun isJpegImage(path: String): Boolean
+    private external fun jpegInfo(path: String)
+
     private external fun calImageSubsamplingSize(width: Int, height: Int): Int
 
     /**
