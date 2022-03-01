@@ -102,8 +102,6 @@ find_library(
 message("build png shared library")
 
 add_library(png STATIC ${libpng_sources})
-#    set_target_properties(png PROPERTIES OUTPUT_NAME ${PNG_LIB_NAME})
-
 target_link_libraries(png zlib log cpufeatures)
 
 target_include_directories(png PUBLIC

@@ -2,10 +2,11 @@
 
 package com.thefrodo.image.jpeg
 
+import android.content.Context
 import android.os.SystemClock
 import android.util.Log
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.filters.SmallTest
-import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.runner.AndroidJUnit4
 import com.thefrodo.image.FrdImage
 import org.junit.After
@@ -19,30 +20,34 @@ import java.io.File
 class LibJpegTest {
 
     private val jpegTurbo = LibJpeg()
+    private val context = ApplicationProvider.getApplicationContext<Context>()
     private var cacheDir: File
     private val originFile: File
 
     init {
-        val context = getInstrumentation().context
         cacheDir = context.externalCacheDir!!
         cacheDir.mkdirs()
-        originFile = File(context.cacheDir, "images/assets/test4k.jpeg")
-    }
 
-    @Before
-    fun setup() {
-        val context = getInstrumentation().context
-        cacheDir = context.externalCacheDir!!
-        cacheDir.mkdirs()
+        val originDir = File(context.cacheDir, "images/assets")
+        originDir.mkdirs()
+
+        originFile = File(originDir, "test4k.jpeg")
         if (originFile.exists()) {
-            originFile.deleteRecursively()
+            originFile.delete()
         }
+
         originFile.outputStream().use { cache ->
-            getInstrumentation().context.assets.open(originFile.name)
+            context.assets.open(originFile.name)
                 .use { inputStream ->
                     inputStream.copyTo(cache)
                 }
         }
+    }
+
+    @Before
+    fun setup() {
+        cacheDir = context.externalCacheDir!!
+        cacheDir.mkdirs()
     }
 
     @After
@@ -52,6 +57,9 @@ class LibJpegTest {
 
     private fun source(): File {
         val srcFile = File(cacheDir, "origin.jpeg")
+        if (srcFile.exists().not()) {
+            srcFile.createNewFile()
+        }
         originFile.copyTo(srcFile, true)
         return srcFile
     }
@@ -150,7 +158,10 @@ class LibJpegTest {
             cost += end - start
             dstSys100File.copyTo(src, true)
         }
-        Log.d(FrdImage.TAG_LibJpeg, "LibJpeg#compressSys100 cost=${cost}ms avg:${cost.toFloat() / 100}")
+        Log.d(
+            FrdImage.TAG_LibJpeg,
+            "LibJpeg#compressSys100 cost=${cost}ms avg:${cost.toFloat() / 100}"
+        )
     }
 
     //
@@ -176,6 +187,9 @@ class LibJpegTest {
             dst100File.copyTo(src, true)
         }
 
-        Log.d(FrdImage.TAG_LibJpeg, "LibJpeg#compress100 cost=${cost}ms avg:${cost.toFloat() / 100}")
+        Log.d(
+            FrdImage.TAG_LibJpeg,
+            "LibJpeg#compress100 cost=${cost}ms avg:${cost.toFloat() / 100}"
+        )
     }
 }
