@@ -1,6 +1,6 @@
 # Android Image Decompress/Compress And Convert/Transform
 
-A library built with the CMake is used for image file decompress/compress on the Android platform.
+A library built with the CMake is used for image file decompress/compress or conversion on the Android platform.
 
 ## WHY
 
@@ -17,7 +17,6 @@ A library built with the CMake is used for image file decompress/compress on the
 * libwebp v1.2.2
 * support libjpeg-turbo built by cmake on Android platform.
 * support jpeg compress.
-* support webp compress.
 
 ## Building
 
