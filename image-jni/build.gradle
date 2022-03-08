@@ -11,7 +11,7 @@ android {
                 arguments "-DANDROID_ARM_NEON=ON", "-DANDROID_TOOLCHAIN=clang"
                 cFlags "-D__STDC_FORMAT_MACROS"
                 abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
-                cppFlags "-Wall -fsanitize=address -fexceptions -frtti -ffunction-sections -fdata-sections -funwind-tables -fasynchronous-unwind-tables"
+                cppFlags "-Wall -fexceptions -frtti -ffunction-sections -fdata-sections -funwind-tables -fasynchronous-unwind-tables"
             }
         }
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -38,6 +38,7 @@ android {
         androidTest.setRoot("src/androidTest")
         main {
             assets.srcDirs = [rootProject.file("images/assets")]
+            java.srcDirs = ["src/java", rootProject.file("external/heif/srcs/api-java/java")]
         }
     }
 

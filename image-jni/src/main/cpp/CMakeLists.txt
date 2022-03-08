@@ -29,6 +29,7 @@ add_library(cpufeatures STATIC
 add_subdirectory("zlib" zlib)
 add_subdirectory("libpng" libpng)
 add_subdirectory("libjpeg" libjpeg)
+add_subdirectory("heif" heif)
 
 #add_subdirectory("libwebp" webp)
 
@@ -55,6 +56,8 @@ find_library(
 target_link_libraries(frdimage
         libjpeg
         png
+        heifjni
+        heifpp
         jnigraphics
         ${log-lib})
 

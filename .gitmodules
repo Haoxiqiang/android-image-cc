@@ -10,3 +10,6 @@
 [submodule "external/zlib"]
 	path = external/zlib
 	url = https://github.com/madler/zlib
+[submodule "external/heif"]
+	path = external/heif
+	url = https://github.com/nokiatech/heif

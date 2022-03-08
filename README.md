@@ -17,6 +17,7 @@ A library built with the CMake is used for image file decompress/compress or con
 * libwebp v1.2.2
 * support libjpeg-turbo built by cmake on Android platform.
 * support jpeg compress.
+* support heif v3.7.0
 
 ## Building
 
@@ -52,4 +53,4 @@ check `zlib.h` and `pngpriv.h` ZLIB_VERNUM == PNG_ZLIB_VERNUM
 - [x] add libjpeg built
 - [x] add libpng built
 - [ ] add libwebp built
-- [ ] add heif built
+- [x] add heif built
