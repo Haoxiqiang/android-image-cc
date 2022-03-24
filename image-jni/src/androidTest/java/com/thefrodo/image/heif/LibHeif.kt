@@ -4,7 +4,11 @@ import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.filters.SmallTest
 import androidx.test.runner.AndroidJUnit4
-import com.nokia.heif.*
+import com.nokia.heif.AVCImageItem
+import com.nokia.heif.GridImageItem
+import com.nokia.heif.HEIF
+import com.nokia.heif.HEVCImageItem
+import com.nokia.heif.JPEGImageItem
 import com.nokia.heif.io.ByteArrayInputStream
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -32,7 +36,6 @@ class LibHeif {
                 val decoderConfig = hevcImageItem.decoderConfig.config
                 val imageData = hevcImageItem.itemDataAsArray
                 // Feed the data to a decoder
-
             } else if (primaryImage is GridImageItem) {
                 val columnCount = primaryImage.columnCount
                 val rowCount = primaryImage.rowCount
@@ -42,11 +45,8 @@ class LibHeif {
                         if (image is HEVCImageItem) {
                             val decoderConfig = image.decoderConfig.config
                             val imageData = image.itemDataAsArray
-
                         } else if (image is JPEGImageItem) {
-
                         } else if (image is AVCImageItem) {
-
                         }
                     }
                 }

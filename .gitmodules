@@ -13,3 +13,6 @@
 [submodule "external/heif"]
 	path = external/heif
 	url = https://github.com/nokiatech/heif
+[submodule "external/x265"]
+	path = external/x265
+	url = https://bitbucket.org/multicoreware/x265_git.git
