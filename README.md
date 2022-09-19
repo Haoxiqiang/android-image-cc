@@ -7,7 +7,7 @@ A library built with the CMake is used for image file decompress/compress or con
 * fix Bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream)
   ; [Use libjpeg-turbo for YUV->RGB conversion in jpeg encoder](https://github.com/google/skia/commit/c7d01d3e1d3621907c27b283fb7f8b6e177c629d)
 * easy customization
-* I want to get to know the diff. image's library.
+* compile common libraries for android.
 
 ## Feature
 
