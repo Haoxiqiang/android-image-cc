@@ -14,7 +14,6 @@ class LibPngTest {
     @Test
     @Throws(Exception::class)
     fun testIsPng() {
-
         val jpegFile = context.fileFromAsset("BoguraChili.jpeg")
 
         val jpegResult = libPng.isPng(jpegFile.absolutePath)

@@ -75,7 +75,7 @@ class LibJpegTest {
                 mode = LibJpeg.CompressMode.ForceSystem,
                 src = src,
                 dst = dstSysFile,
-                overwrite = true,
+                overwrite = true
             )
         )
         val end = SystemClock.elapsedRealtime()
@@ -93,7 +93,7 @@ class LibJpegTest {
                 mode = LibJpeg.CompressMode.ForceLibJpeg,
                 src = src,
                 dst = dstFile,
-                overwrite = true,
+                overwrite = true
             )
         )
         val end = SystemClock.elapsedRealtime()
@@ -112,7 +112,7 @@ class LibJpegTest {
                 src = src,
                 dst = dstWithAlphaFile,
                 keepAlpha = true,
-                overwrite = true,
+                overwrite = true
             )
         )
         val end = SystemClock.elapsedRealtime()
@@ -131,7 +131,7 @@ class LibJpegTest {
                 src = src,
                 dst = dstFromBitmapFile,
                 keepAlpha = true,
-                overwrite = true,
+                overwrite = true
             )
         )
         val end = SystemClock.elapsedRealtime()
@@ -151,7 +151,7 @@ class LibJpegTest {
                     mode = LibJpeg.CompressMode.ForceSystem,
                     src = src,
                     dst = dstSys100File,
-                    overwrite = true,
+                    overwrite = true
                 )
             )
             val end = SystemClock.elapsedRealtime()
@@ -178,7 +178,7 @@ class LibJpegTest {
                     mode = LibJpeg.CompressMode.ForceLibJpeg,
                     src = src,
                     dst = dst100File,
-                    overwrite = true,
+                    overwrite = true
                 )
             )
             val end = SystemClock.elapsedRealtime()

@@ -24,7 +24,7 @@ int check_if_png(FILE *fp) {
 }
 
 JNIEXPORT jboolean JNICALL
-Java_com_thefrodo_image_png_LibPng_isPNGImage(JNIEnv *env, jobject thiz, jobject path) {
+Java_com_thefrodo_image_png_LibPng_isPNGImage(JNIEnv *env, jobject thiz, jstring path) {
 
     const char *input = (*env)->GetStringUTFChars(env, path, JNI_FALSE);
     /* source file */
@@ -70,7 +70,7 @@ Java_com_thefrodo_image_png_LibPng_pngInfo(JNIEnv *env, jobject thiz, jstring pa
                                                         NULL,
                                                         NULL);
     if (!png_struct_ptr) {
-        LOGE("PNG init error %d", png_struct_ptr);
+        LOGE("PNG init error %p", png_struct_ptr);
         fclose(infile);
         (*env)->ReleaseStringChars(env, path, (const jchar *) input);
         return;
@@ -81,7 +81,7 @@ Java_com_thefrodo_image_png_LibPng_pngInfo(JNIEnv *env, jobject thiz, jstring pa
 
         png_destroy_read_struct(&png_struct_ptr, NULL, NULL);
 
-        LOGE("PNG init error %d", info_ptr);
+        LOGE("PNG init error %p", info_ptr);
         fclose(infile);
         (*env)->ReleaseStringChars(env, path, (const jchar *) input);
         return;
@@ -107,4 +107,3 @@ Java_com_thefrodo_image_png_LibPng_pngInfo(JNIEnv *env, jobject thiz, jstring pa
     fclose(infile);
     (*env)->ReleaseStringChars(env, path, (const jchar *) input);
 }
-

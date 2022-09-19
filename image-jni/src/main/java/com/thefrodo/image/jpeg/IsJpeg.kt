@@ -8,7 +8,6 @@ private val JPEG_SIGNATURE = byteArrayOf(0xff.toByte(), 0xd8.toByte(), 0xff.toBy
 private const val SIGNATURE_CHECK_SIZE = 5000
 
 fun LibJpeg.isJpeg(inputStream: BufferedInputStream): Boolean {
-
     inputStream.mark(SIGNATURE_CHECK_SIZE)
     val signatureCheckBytes = ByteArray(SIGNATURE_CHECK_SIZE)
     inputStream.read(signatureCheckBytes)

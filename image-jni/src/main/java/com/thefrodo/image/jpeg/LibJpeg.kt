@@ -33,9 +33,8 @@ class LibJpeg {
         src: File,
         dst: File,
         overwrite: Boolean = false,
-        keepAlpha: Boolean = false,
+        keepAlpha: Boolean = false
     ): Boolean {
-
         if (overwrite) {
             if (dst.exists()) {
                 dst.deleteRecursively()
@@ -162,12 +161,12 @@ class LibJpeg {
         src: String,
         dst: String,
         @IntRange(from = 0, to = 100) quality: Int,
-        fancyUpsampling: Boolean = true,
+        fancyUpsampling: Boolean = true
     ): Int
 
     private external fun nativeCompressBitmap(
         bitmap: Bitmap,
         dst: String,
-        @IntRange(from = 0, to = 100) quality: Int,
+        @IntRange(from = 0, to = 100) quality: Int
     ): Boolean
 }
